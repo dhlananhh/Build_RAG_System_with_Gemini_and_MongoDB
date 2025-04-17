@@ -258,8 +258,15 @@ def run_interactive_qa(collection):
         print("-" * 30 + "\n")
 
 if __name__ == "__main__":
-    pdf_url = "https://services.google.com/fh/files/misc/ai_adoption_framework_whitepaper.pdf"
-    pdf_path = "ai_adoption_framework_whitepaper.pdf"
+    # pdf_url = "https://services.google.com/fh/files/misc/ai_adoption_framework_whitepaper.pdf"
+    # pdf_path = "ai_adoption_framework_whitepaper.pdf"
+    # pdf_url = "https://services.google.com/fh/files/misc/a_platform-centric_approach_to_scaling_generative_ai_in_the_enterprise.pdf"
+    # pdf_path = "a_platform-centric_approach_to_scaling_generative_ai_in_the_enterprise.pdf"
+    # pdf_url = "https://services.google.com/fh/files/misc/improve_llm_performance_reliability.pdf"
+    # pdf_path = "improve_llm_performance_reliability.pdf"
+    pdf_url = "https://services.google.com/fh/files/misc/generative_ai_value_evaluation_framework.pdf"
+    pdf_path = "generative_ai_value_evaluation_framework.pdf"
+
     if not download_pdf(pdf_url, pdf_path):
         exit()
 
