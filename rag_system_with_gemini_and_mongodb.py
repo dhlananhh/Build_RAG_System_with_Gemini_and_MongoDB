@@ -32,9 +32,11 @@ except Exception as e:
     print(f"Failed to configure Gemini API: {e}")
     exit()
 
+# Cấu hình Model
 EMBEDDING_MODEL = "models/embedding-001"
 GENERATION_MODEL = 'gemini-2.0-flash'
 
+# Tải file PDF từ URL
 def download_pdf(url, save_path):
     if not os.path.exists(save_path):
         print(f"Downloading PDF from {url}...")
@@ -51,6 +53,7 @@ def download_pdf(url, save_path):
         print(f"PDF file already exists at {save_path}. Skipping download.")
     return True
 
+# Load text từ file PDF đã được download thành công
 def load_pdf(file_path):
     if not os.path.exists(file_path):
         print(f"Error: PDF file not found at {file_path}")
@@ -68,6 +71,7 @@ def load_pdf(file_path):
         print(f"Error reading PDF file {file_path}: {e}")
         return None
 
+# Chia văn bản thành các đoạn văn dựa trên các khoảng trắng
 def split_text(text: str) -> List[str]:
     """Split text into paragraphs based on blank lines."""
     if not text:
@@ -75,6 +79,7 @@ def split_text(text: str) -> List[str]:
     chunks = re.split(r'\n\s*\n+', text)
     return [chunk.strip() for chunk in chunks if chunk.strip()]
 
+# Tạo Embeddings với Gemini
 def generate_embeddings(texts: List[str], batch_size: int = 100) -> Optional[List[List[float]]]:
     """
     Create embeddings for lists of text paragraphs using the Gemini API.
@@ -100,6 +105,7 @@ def generate_embeddings(texts: List[str], batch_size: int = 100) -> Optional[Lis
         print(f"Error generating embeddings: {e}")
         return None
 
+# Tương tác với MongoDB Atlas
 def get_mongodb_collection():
     """Kết nối tới MongoDB Atlas và trả về collection object."""
     try:
@@ -163,6 +169,7 @@ def get_relevant_passages_mongodb(query: str, collection, n_results: int) -> Lis
         return []
 
     print(f"Querying MongoDB Atlas Vector Search (index: {VECTOR_INDEX_NAME})...")
+    # Sử dụng aggregation pipeline với $vectorSearch
     pipeline = [
         {
             "$vectorSearch": {
@@ -193,6 +200,7 @@ def get_relevant_passages_mongodb(query: str, collection, n_results: int) -> Lis
         print(f"Error querying MongoDB Atlas Vector Search: {e}")
         return []
 
+# Tạo Prompt và Generate ra câu trả lời
 def make_rag_prompt(query: str, relevant_passages: List[str]) -> str:
     """Generate complete prompts for LLM based on queries and related text."""
     combined_passage = "\n---\n".join(relevant_passages)
