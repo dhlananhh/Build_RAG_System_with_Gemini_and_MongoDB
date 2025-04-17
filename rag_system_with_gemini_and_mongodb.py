@@ -32,7 +32,6 @@ except Exception as e:
     print(f"Failed to configure Gemini API: {e}")
     exit()
 
-# Cấu hình Model
 EMBEDDING_MODEL = "models/embedding-001"
 GENERATION_MODEL = 'gemini-2.0-flash'
 
@@ -70,7 +69,7 @@ def load_pdf(file_path):
         return None
 
 def split_text(text: str) -> List[str]:
-    """Chia văn bản thành các đoạn dựa trên dòng trắng."""
+    """Split text into paragraphs based on blank lines."""
     if not text:
         return []
     chunks = re.split(r'\n\s*\n+', text)
@@ -270,7 +269,7 @@ if __name__ == "__main__":
 
     chunked_text = split_text(pdf_text)
     if not chunked_text:
-        print("Không thể chia nhỏ văn bản PDF.")
+        print("Cannot split PDF document.")
         exit()
     print(f"Split PDF into {len(chunked_text)} chunks.")
 
