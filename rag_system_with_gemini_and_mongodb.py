@@ -234,7 +234,6 @@ def generate_answer(prompt: str) -> str:
             except Exception:
                 pass
             return "Sorry, I cannot create a response to this request. Content may be blocked or an error may have occurred."
-
         return response.text
     except Exception as e:
         print(f"Error generating answer with Gemini: {e}")
