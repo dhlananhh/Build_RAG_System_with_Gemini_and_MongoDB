@@ -18,7 +18,7 @@ The workflow is as follows:
 6.  **Information Retrieval**: When a user submits a query:
     - The query is first converted into a vector embedding.
     - MongoDB Atlas Vector Search is used to perform a high-speed similarity search, retrieving the text chunks most relevant to the user's query from the database.
-7.  **Answer Generation**: The original query and the retrieved passages are compiled into a comprehensive prompt. This prompt is then passed to the `gemini-pro` model to generate a fluent, informative answer based _only_ on the provided context.
+7.  **Answer Generation**: The original query and the retrieved passages are compiled into a comprehensive prompt. This prompt is then passed to the `gemini-2.0-flash` model to generate a fluent, informative answer based _only_ on the provided context.
 8.  **Interactive Q&A**: The system provides a command-line interface, allowing for a continuous question-and-answer session.
 
 ## Technologies Used
